@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>My Little Pony RPG</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f5f0ff;
+  text-align: center;
+}
+
+.container {
+  background: white;
+  padding: 25px;
+  margin: 50px auto;
+  width: 320px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(128,0,128,0.2);
+}
+
+h1 {
+  color: purple;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+}
+
+button {
+  background: purple;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.visitante {
+  background: gray;
+}
+
+.poney-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.poney {
+  font-size: 25px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.selected {
+  border: 2px solid purple;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="telaCadastro">
+
+<h1>🌈 Cadastro</h1>
+
+<input id="nome" placeholder="Nome">
+<input id="idade" placeholder="Idade">
+
+<select id="genero">
+<option value="">Gênero</option>
+<option>Feminino</option>
+<option>Masculino</option>
+<option>Outro</option>
+</select>
+
+<input type="password" id="senha" placeholder="Senha">
+
+<h3>Escolha seu pônei:</h3>
+
+<div class="poney-list">
+  <div class="poney" onclick="selecionar(this,'Twilight')">🦄</div>
+  <div class="poney" onclick="selecionar(this,'Rainbow')">🌈</div>
+  <div class="poney" onclick="selecionar(this,'Pinkie')">🎉</div>
+</div>
+
+<button onclick="cadastrar()">Cadastrar</button>
+<p onclick="mostrarLogin()" style="cursor:pointer;color:purple;">Já tenho conta</p>
+
+</div>
+
+<div class="container" id="telaLogin" style="display:none;">
+
+<h1>Login</h1>
+
+<input id="loginNome" placeholder="Nome">
+<input type="password" id="loginSenha" placeholder="Senha">
+
+<button onclick="login()">Entrar</button>
+
+<button class="visitante" onclick="visitante()">Entrar como visitante</button>
+
+<p onclick="mostrarCadastro()" style="cursor:pointer;color:purple;">Criar conta</p>
+
+</div>
+
+<div class="container" id="telaHome" style="display:none;">
+
+<h1>🏠 Home</h1>
+
+<p id="info"></p>
+
+<button onclick="ganharCarta()">Ganhar carta 🎴</button>
+
+<button onclick="logout()">Sair</button>
+
+</div>
+
+<script>
+let poney = "";
+
+function selecionar(el, nome) {
+  poney = nome;
+  document.querySelectorAll(".poney").forEach(p => p.classList.remove("selected"));
+  el.classList.add("selected");
+}
+
+function cadastrar() {
+  let nome = document.getElementById("nome").value;
+  let idade = document.getElementById("idade").value;
+  let genero = document.getElementById("genero").value;
+  let senha = btoa(document.getElementById("senha").value);
+
+  if (!nome || !idade || !genero || !senha || !poney) {
+    alert("Preencha tudo!");
+    return;
+  }
+
+  let user = { nome, idade, genero, senha, poney, visitante:false };
+  localStorage.setItem("user", JSON.stringify(user));
+
+  alert("Cadastro feito!");
+  mostrarLogin();
+}
+
+function login() {
+  let nome = document.getElementById("loginNome").value;
+  let senha = btoa(document.getElementById("loginSenha").value);
+
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    alert("Nenhum usuário cadastrado!");
+    return;
+  }
+
+  if (nome === user.nome && senha === user.senha) {
+    sessionStorage.setItem("user", JSON.stringify(user));
+    abrirHome(user);
+  } else {
+    alert("Dados incorretos!");
+  }
+}
+
+function visitante() {
+  let user = { nome:"Visitante", visitante:true };
+  sessionStorage.setItem("user", JSON.stringify(user));
+  abrirHome(user);
+}
+
+function abrirHome(user) {
+  document.getElementById("telaCadastro").style.display="none";
+  document.getElementById("telaLogin").style.display="none";
+  document.getElementById("telaHome").style.display="block";
+
+  if (user.visitante) {
+    document.getElementById("info").innerText = "Você está como visitante 👤";
+  } else {
+    document.getElementById("info").innerText =
+      "Olá " + user.nome + " 🦄 | Pônei: " + user.poney;
+  }
+}
+
+function logout() {
+  sessionStorage.clear();
+  mostrarLogin();
+}
+
+function mostrarLogin() {
+  document.getElementById("telaCadastro").style.display="none";
+  document.getElementById("telaLogin").style.display="block";
+  document.getElementById("telaHome").style.display="none";
+}
+
+function mostrarCadastro() {
+  document.getElementById("telaCadastro").style.display="block";
+  document.getElementById("telaLogin").style.display="none";
+}
+
+function ganharCarta() {
+  let user = JSON.parse(sessionStorage.getItem("user"));
+
+  if (user.visitante) {
+    alert("Crie uma conta para ganhar cartas!");
+  } else {
+    alert("Você ganhou uma carta! 🎴");
+  }
+}
+</script>
+
+</body>
+</html>
