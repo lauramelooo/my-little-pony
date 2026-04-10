@@ -5,70 +5,70 @@
 <title>My Little Pony RPG</title>
 
 <style>
-body {
-  font-family: Arial;
-  background: #f5f0ff;
-  text-align: center;
-}
+body { font-family: Arial; background: #f5f0ff; text-align: center; }
 
 .container {
   background: white;
-  padding: 25px;
-  margin: 50px auto;
-  width: 320px;
+  padding: 20px;
+  margin: 30px auto;
+  width: 340px;
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(128,0,128,0.2);
 }
 
-h1 {
-  color: purple;
-}
+h1 { color: purple; }
 
 input, select, button {
   width: 100%;
   padding: 10px;
-  margin: 8px 0;
+  margin: 6px 0;
   border-radius: 8px;
 }
 
-button {
-  background: purple;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+button { background: purple; color: white; border: none; }
 
-.visitante {
-  background: gray;
-}
+.visitante { background: gray; }
 
 .poney-list {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
 }
 
-.poney {
-  font-size: 25px;
+.avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
   cursor: pointer;
-  padding: 10px;
-  border-radius: 10px;
 }
 
-.selected {
-  border: 2px solid purple;
+.selected { border: 3px solid purple; }
+
+.card {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  color: white;
 }
+
+.comum { background: gray; }
+.rara { background: blue; }
+.lendaria { background: gold; color:black; }
+
 </style>
 </head>
 
 <body>
 
-<div class="container" id="telaCadastro">
+<!-- CADASTRO -->
+<div class="container" id="cadastro">
 
-<h1>🌈 Cadastro</h1>
+<h1>Cadastro</h1>
 
 <input id="nome" placeholder="Nome">
-
-<input id="nascimento" placeholder="Data de nascimento (dd/mm/aaaa)" maxlength="10" oninput="formatarData(this)">
+<input id="nascimento" placeholder="Data (dd/mm/aaaa)" maxlength="10" oninput="formatarData(this)">
 
 <select id="genero">
 <option value="">Gênero</option>
@@ -82,147 +82,199 @@ button {
 <h3>Escolha seu pônei:</h3>
 
 <div class="poney-list">
-  <div class="poney" onclick="selecionar(this,'Twilight')">🦄</div>
-  <div class="poney" onclick="selecionar(this,'Rainbow')">🌈</div>
-  <div class="poney" onclick="selecionar(this,'Pinkie')">🎉</div>
+<img src="https://media.wired.com/photos/59337ed17965e75f5f3c8503/3:2/w_2560%2Cc_limit/MLP-Twilight.jpg" class="avatar" onclick="selecionar(this,'Twilight')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcko1WFEG5FIPA6grJXd1cWJAXiSHAQP0LdzVhOdGJqpi-V0b0it6CxiKlAjuldaNIOs3DutSq5MAlWRPmgMXkgBnC9iWvw8Kga-tLL_Bh&s=10" class="avatar" onclick="selecionar(this,'Fluttershy')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGk1NmbGDPaUJCLlN4uhOtHeJTsAWeBvh3Eg6_wJ0YIOOnbHjn3vZ4NbVPd8XT1D9i_4l21vlY-Xg4sX_8j5nZ5qZexcBFiDbxyxXq_xZdZQ&s=10" class="avatar" onclick="selecionar(this,'Rainbow')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrX51t_lIv-XJw9lQHe2lkAWGZm6KBkOwrOIpBtnouBpYVWuQsaNGJvRgkhcnROL70xYvyWXk8IYnGdfxp51X6651Mkn2nq1vQg8R3jAWe&s=10" class="avatar" onclick="selecionar(this,'Rarity')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfsKVElxJR57blusabDhZZgE8RK7COxWgPqowcREHKQ9etkKq3qQT2MfTBAOz0BaqwiXMGaVUsYR5XOHF3mAKRrQxPjIOuhl1ixwRp9JGF&s=10" class="avatar" onclick="selecionar(this,'Applejack')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLcS6NnetzUhMydMsgoVqH--MRvgEEOdM2pB8zBA2XFxGw68DoST-Honi6jydIv-1jm7eHEaLX_DptXWURHIAJ8tr3z4BCihCgEUMnGMpvoQ&s=10" class="avatar" onclick="selecionar(this,'Pinkie')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhNPbnRSIyuHC4xzRhpnfoOlNAbL24ZghXC97-PjZ1JRokX2NX6QLT7Ecj_JtccXQyzKc3PJF3GUiJwytbkqTVxjLqhh58ZTmKPzOs6agu&s=10" class="avatar" onclick="selecionar(this,'Celestia')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN7MTTxM6fHHlRL_FrCvuVND2A08QMb6wHiRaN3Vos6dZsJvAe_cdo1Tpi-FcvFvnqSZGNmFXyNnzBdwYYCBMTkW1A84pc3SiKoqk-YWg4&s=10" class="avatar" onclick="selecionar(this,'Luna')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE-Wu4fktnT29fXyNVIsI7liIoVrjxL2KQkIVtK-aeByjXMrzte1T7vsaddKOKOHh72fPxIJS3G6vYPSAabj6mzPt7hFKkUZKd0Dk3M0pm&s=10" class="avatar" onclick="selecionar(this,'AppleBloom')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC9nVHFWaoIvHvmnHdMYWwXmG-J4anMfpDcO8NLbTMsTqgbXJ1jHLsw-PXUm1YVJRAhlDzQmxcK8G88daJL4shAEqCcpW0fVoqeEmkib4MAA&s=10" class="avatar" onclick="selecionar(this,'Scootaloo')">
 </div>
 
 <button onclick="cadastrar()">Cadastrar</button>
-<p onclick="mostrarLogin()" style="cursor:pointer;color:purple;">Já tenho conta</p>
+<p onclick="mostrarLogin()">Já tenho conta</p>
 
 </div>
 
-<div class="container" id="telaLogin" style="display:none;">
-
+<!-- LOGIN -->
+<div class="container" id="login" style="display:none;">
 <h1>Login</h1>
 
 <input id="loginNome" placeholder="Nome">
-<input type="password" id="loginSenha" placeholder="Senha">
+<input id="loginSenha" type="password" placeholder="Senha">
 
-<button onclick="login()">Entrar</button>
-
+<button onclick="entrar()">Entrar</button>
 <button class="visitante" onclick="visitante()">Entrar como visitante</button>
 
-<p onclick="mostrarCadastro()" style="cursor:pointer;color:purple;">Criar conta</p>
-
+<p onclick="mostrarCadastro()">Criar conta</p>
 </div>
 
-<div class="container" id="telaHome" style="display:none;">
+<!-- HOME -->
+<div class="container" id="home" style="display:none;">
+<h1>🏠 Jogo</h1>
 
-<h1>🏠 Home</h1>
-
+<img id="foto" class="avatar">
 <p id="info"></p>
 
-<button onclick="ganharCarta()">Ganhar carta 🎴</button>
-
+<button onclick="daily()">🎁 Recompensa diária</button>
+<button onclick="missao()">🎮 Missão</button>
+<button onclick="mostrarCartas()">🃏 Cartas</button>
 <button onclick="logout()">Sair</button>
 
+<div id="cartas"></div>
 </div>
 
 <script>
-let poney = "";
 
-function selecionar(el, nome) {
-  poney = nome;
-  document.querySelectorAll(".poney").forEach(p => p.classList.remove("selected"));
-  el.classList.add("selected");
+let poney="";
+
+function selecionar(el,n){
+ poney=n;
+ document.querySelectorAll(".avatar").forEach(a=>a.classList.remove("selected"));
+ el.classList.add("selected");
 }
 
-function formatarData(input) {
-  let valor = input.value.replace(/\D/g, "");
-
-  if (valor.length > 2) {
-    valor = valor.replace(/(\d{2})(\d)/, "$1/$2");
-  }
-
-  if (valor.length > 5) {
-    valor = valor.replace(/(\d{2})\/(\d{2})(\d)/, "$1/$2/$3");
-  }
-
-  input.value = valor;
+function formatarData(i){
+ let v=i.value.replace(/\D/g,"");
+ if(v.length>2)v=v.replace(/(\d{2})(\d)/,"$1/$2");
+ if(v.length>5)v=v.replace(/(\d{2})\/(\d{2})(\d)/,"$1/$2/$3");
+ i.value=v;
 }
 
-function cadastrar() {
-  let nome = document.getElementById("nome").value;
-  let nascimento = document.getElementById("nascimento").value;
-  let genero = document.getElementById("genero").value;
-  let senha = btoa(document.getElementById("senha").value);
+function cadastrar(){
+ let user={
+  nome:nome.value,
+  nascimento:nascimento.value,
+  genero:genero.value,
+  senha:btoa(senha.value),
+  poney,
+  cartas:[],
+  ultimoDia:null
+ };
 
-  if (!nome || !nascimento || !genero || !senha || !poney) {
-    alert("Preencha tudo!");
-    return;
-  }
+ if(!user.nome||!user.senha||!user.poney){
+  alert("Preencha tudo!");
+  return;
+ }
 
-  let user = { nome, nascimento, genero, senha, poney, visitante:false };
-  localStorage.setItem("user", JSON.stringify(user));
+ localStorage.setItem("user_"+user.nome,JSON.stringify(user));
 
-  alert("Cadastro feito!");
-  mostrarLogin();
+ alert("Conta criada!");
+ mostrarLogin();
 }
 
-function login() {
-  let nome = document.getElementById("loginNome").value;
-  let senha = btoa(document.getElementById("loginSenha").value);
+function entrar(){
+ let nome=loginNome.value;
+ let senha=btoa(loginSenha.value);
 
-  let user = JSON.parse(localStorage.getItem("user"));
+ let user=JSON.parse(localStorage.getItem("user_"+nome));
 
-  if (!user) {
-    alert("Nenhum usuário cadastrado!");
-    return;
-  }
+ if(!user){
+  alert("Conta não existe!");
+  return;
+ }
 
-  if (nome === user.nome && senha === user.senha) {
-    sessionStorage.setItem("user", JSON.stringify(user));
-    abrirHome(user);
-  } else {
-    alert("Dados incorretos!");
-  }
+ if(user.senha!==senha){
+  alert("Senha errada!");
+  return;
+ }
+
+ sessionStorage.setItem("logado",nome);
+ abrir(user);
 }
 
-function visitante() {
-  let user = { nome:"Visitante", visitante:true };
-  sessionStorage.setItem("user", JSON.stringify(user));
-  abrirHome(user);
+function visitante(){
+ let user={nome:"Visitante",visitante:true};
+ abrir(user);
 }
 
-function abrirHome(user) {
-  document.getElementById("telaCadastro").style.display="none";
-  document.getElementById("telaLogin").style.display="none";
-  document.getElementById("telaHome").style.display="block";
+function abrir(user){
+ cadastro.style.display="none";
+ login.style.display="none";
+ home.style.display="block";
 
-  if (user.visitante) {
-    document.getElementById("info").innerText = "Você está como visitante 👤";
-  } else {
-    document.getElementById("info").innerText =
-      "Olá " + user.nome + " 🦄 | Nascimento: " + user.nascimento + " | Pônei: " + user.poney;
-  }
+ if(!user.visitante){
+  foto.src=document.querySelector(`img[onclick*="${user.poney}"]`).src;
+  info.innerText="Olá "+user.nome;
+ }else{
+  info.innerText="Modo visitante 👤";
+ }
 }
 
-function logout() {
-  sessionStorage.clear();
-  mostrarLogin();
+function daily(){
+ let nome=sessionStorage.getItem("logado");
+ if(!nome)return alert("Visitante não pode!");
+
+ let user=JSON.parse(localStorage.getItem("user_"+nome));
+ let hoje=new Date().toDateString();
+
+ if(user.ultimoDia===hoje){
+  alert("Já pegou hoje!");
+  return;
+ }
+
+ user.ultimoDia=hoje;
+ ganharCarta(user);
+ salvar(user);
 }
 
-function mostrarLogin() {
-  document.getElementById("telaCadastro").style.display="none";
-  document.getElementById("telaLogin").style.display="block";
-  document.getElementById("telaHome").style.display="none";
+function ganharCarta(user){
+ let r=Math.random();
+ let tipo=r<0.6?"comum":r<0.9?"rara":"lendaria";
+ user.cartas.push(tipo);
+ alert("Carta "+tipo+"!");
 }
 
-function mostrarCadastro() {
-  document.getElementById("telaCadastro").style.display="block";
-  document.getElementById("telaLogin").style.display="none";
+function mostrarCartas(){
+ let nome=sessionStorage.getItem("logado");
+ if(!nome)return alert("Visitante não tem cartas!");
+
+ let user=JSON.parse(localStorage.getItem("user_"+nome));
+
+ cartas.innerHTML="";
+ user.cartas.forEach(c=>{
+  cartas.innerHTML+=`<div class="card ${c}">${c}</div>`;
+ });
 }
 
-function ganharCarta() {
-  let user = JSON.parse(sessionStorage.getItem("user"));
+function missao(){
+ let nome=sessionStorage.getItem("logado");
+ if(!nome)return alert("Visitante não pode!");
 
-  if (user.visitante) {
-    alert("Crie uma conta para ganhar cartas!");
-  } else {
-    alert("Você ganhou uma carta! 🎴");
-  }
+ let user=JSON.parse(localStorage.getItem("user_"+nome));
+
+ let escolha=confirm("Ir na festa?");
+ if(escolha){
+  ganharCarta(user);
+ }else{
+  alert("Você recusou...");
+ }
+
+ salvar(user);
 }
+
+function salvar(u){
+ localStorage.setItem("user_"+u.nome,JSON.stringify(u));
+}
+
+function logout(){
+ sessionStorage.clear();
+ location.reload();
+}
+
+function mostrarLogin(){
+ cadastro.style.display="none";
+ login.style.display="block";
+}
+
+function mostrarCadastro(){
+ cadastro.style.display="block";
+ login.style.display="none";
+}
+
 </script>
 
 </body>
