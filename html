@@ -67,7 +67,8 @@ button {
 <h1>🌈 Cadastro</h1>
 
 <input id="nome" placeholder="Nome">
-<input id="idade" placeholder="Idade">
+
+<input id="nascimento" placeholder="Data de nascimento (dd/mm/aaaa)" maxlength="10" oninput="formatarData(this)">
 
 <select id="genero">
 <option value="">Gênero</option>
@@ -127,18 +128,32 @@ function selecionar(el, nome) {
   el.classList.add("selected");
 }
 
+function formatarData(input) {
+  let valor = input.value.replace(/\D/g, "");
+
+  if (valor.length > 2) {
+    valor = valor.replace(/(\d{2})(\d)/, "$1/$2");
+  }
+
+  if (valor.length > 5) {
+    valor = valor.replace(/(\d{2})\/(\d{2})(\d)/, "$1/$2/$3");
+  }
+
+  input.value = valor;
+}
+
 function cadastrar() {
   let nome = document.getElementById("nome").value;
-  let idade = document.getElementById("idade").value;
+  let nascimento = document.getElementById("nascimento").value;
   let genero = document.getElementById("genero").value;
   let senha = btoa(document.getElementById("senha").value);
 
-  if (!nome || !idade || !genero || !senha || !poney) {
+  if (!nome || !nascimento || !genero || !senha || !poney) {
     alert("Preencha tudo!");
     return;
   }
 
-  let user = { nome, idade, genero, senha, poney, visitante:false };
+  let user = { nome, nascimento, genero, senha, poney, visitante:false };
   localStorage.setItem("user", JSON.stringify(user));
 
   alert("Cadastro feito!");
@@ -179,7 +194,7 @@ function abrirHome(user) {
     document.getElementById("info").innerText = "Você está como visitante 👤";
   } else {
     document.getElementById("info").innerText =
-      "Olá " + user.nome + " 🦄 | Pônei: " + user.poney;
+      "Olá " + user.nome + " 🦄 | Nascimento: " + user.nascimento + " | Pônei: " + user.poney;
   }
 }
 
